@@ -1,0 +1,72 @@
+.label-wrap {
+    max-width: 230px;
+    width: 100%;
+    position: relative;
+    margin: auto;
+    height: auto;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 12px 15px 22px;
+    -webkit-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+.label-wrap .svg-icon {
+    fill: #868686;
+}
+.label-wrap::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    width: -webkit-calc(100% - 30px);
+    width: -moz-calc(100% - 30px);
+    width: calc(100% - 30px);
+    height: 1px;
+    background-color: #868686;
+    -webkit-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+    -moz-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+.label-wrap.focus {
+    background-color: #fff;
+    -webkit-box-shadow: 0 10px 24px 0 rgba(51, 51, 51, 0.25);
+    -moz-box-shadow: 0 10px 24px 0 rgba(51, 51, 51, 0.25);
+    box-shadow: 0 10px 24px 0 rgba(51, 51, 51, 0.25);
+}
+.label-wrap.focus .svg-icon {
+    fill: #333;
+    -webkit-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+    -moz-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+.label-wrap.focus::before {
+    height: 2px;
+    background-color: #333;
+}
+.label-wrap.valid .svg-icon {
+    fill: #064a69;
+}
+.label-wrap.valid::before {
+    height: 2px;
+    background-color: #064a69;
+}
+.label-wrap input, .label-wrap textarea {
+    width: 100%;
+    font-family: ProximaNovaRegular;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding-left: 14px;
+    font-size: 18px;
+}
+.label-wrap textarea {
+    height: 80px;
+    padding: 5px;
+    resize: vertical;
+}
+.svg-icon-text {
+    display: none;
+}

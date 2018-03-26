@@ -1,0 +1,32 @@
+.aboutprod {
+    padding: 40px 0;
+}
+.aboutprod__head {
+    font-size: 33px;
+    font-weight: 500;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.aboutprod__subtitle {
+    text-align: center;
+    font-size: 27px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.aboutprod__text {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+.aboutprod__list {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+.aboutprod__list li {
+    list-style-type: decimal;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 4px;
+}

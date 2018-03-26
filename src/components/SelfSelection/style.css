@@ -1,0 +1,118 @@
+.self-selection {
+    padding: 40px 0;
+}
+.self-selection .title-accent {
+    font-size: 24px;
+}
+.self-selection__wrap {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.self-selection__left {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 40%;
+    -moz-box-flex: 1;
+    -ms-flex: 1 1 40%;
+    flex: 1 1 40%;
+}
+.self-selection__text {
+    max-width: 320px;
+    margin-bottom: 20px;
+}
+.self-selection__img {
+    padding-right: 40px;
+}
+.self-selection__img img {
+    max-width: 100%;
+}
+.self-selection__center {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 14px;
+    color: #bdbdbd;
+    text-transform: uppercase;
+}
+.self-selection__center span {
+    padding: 10px 0;
+}
+.self-selection__center::before, .self-selection__center::after {
+    position: absolute;
+    content: "";
+    background-color: #bdbdbd;
+    width: 1px;
+    height: calc(50% - 20px);
+    left: 50%;
+}
+.self-selection__center::before {
+    bottom: 0;
+}
+.self-selection__center::after {
+    top: 0;
+}
+.self-selection__right {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 40%;
+    -moz-box-flex: 1;
+    -ms-flex: 1 1 40%;
+    flex: 1 1 40%;
+}
+
+@media screen and (max-width: 700px) {
+    .self-selection {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e4e4e4;
+    }
+    .self-selection__wrap {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+    .self-selection__img {
+        text-align: center;
+        padding: 0;
+    }
+    .self-selection__center {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        margin: 25px 0 5px;
+    }
+    .self-selection__center::before, .self-selection__center::after {
+        top: 50%;
+        width: calc(50% - 40px);
+        height: 1px;
+    }
+    .self-selection__center::before {
+        left: 0;
+    }
+    .self-selection__center::after {
+        right: 0;
+        left: auto;
+    }
+}
