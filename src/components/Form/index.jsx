@@ -3,6 +3,7 @@ import Input from '../Input';
 import Svg from '../Svg';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import Placeholder from '../Placeholder/';
 import "./style.css";
 
 export default class Form extends Component {
@@ -116,7 +117,7 @@ export default class Form extends Component {
                         >
                             {
                                 this.state.load ?
-                                <span>Загрузка...</span>
+                                <Placeholder />
                                 :
                                 <React.Fragment>
                                     <Svg icon='basket' />
@@ -134,11 +135,9 @@ export default class Form extends Component {
                         >
                             {
                                 this.state.load ?
-                                <span>Загрузка...</span>
+                                <Placeholder />
                                 :
-                                <React.Fragment>
-                                    <span>Перезвоните мне</span>
-                                </React.Fragment>
+                                <span>Перезвоните мне</span>
                             }
                         </button>;
                 break;
@@ -151,11 +150,9 @@ export default class Form extends Component {
                         >
                             {
                                 this.state.load ?
-                                <span>Загрузка...</span>
+                                <Placeholder />
                                 :
-                                <React.Fragment>
-                                    <span>Отправить</span>
-                                </React.Fragment>
+                                <span>Отправить</span>
                             }
                         </button>;
                 break;
@@ -167,11 +164,9 @@ export default class Form extends Component {
                         >
                             {
                                 this.state.load ?
-                                <span>Загрузка...</span>
+                                <Placeholder />
                                 :
-                                <React.Fragment>
-                                    <span>Подписаться</span>
-                                </React.Fragment>
+                                <span>Подписаться</span>
                             }
                         </button>;
                 break;
@@ -251,13 +246,11 @@ export default class Form extends Component {
         axios.get(this.url + this.token + '/sendMessage?chat_id=' + this.chatID + '&text=' + this.messageText)
             .then(res => {
                 setTimeout(() => {
-                    // this.phone.clearInput();
                     this.setState({ load: false, sent: true });
                 }, 500);
                 
                 setTimeout(() => {
                     this.formClear();
-                    
                 }, 2000);
             })
             .catch(err => {

@@ -35,8 +35,9 @@ export default class Navigation extends Component {
                 height: document.documentElement.clientHeight
             }
         }, () => {
-            this.state.viewport.width < 500 ?
-            this.setState({ searchMobile: true }):
+            this.state.viewport.width < 600 ?
+            this.setState({ searchMobile: true })
+            :
             this.setState({ searchMobile: false });
         });
     }

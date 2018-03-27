@@ -1,39 +1,57 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Svg from '../../components/Svg/';
 import "./style.css";
+
 import armchairs from './images/armchairs.png';
 import sofa from './images/sofa.png';
 import chairs from './images/chairs.png';
+import akapulko from '../../images/collections/akapulko/chehly-na-dvuhmestnye-divany/азул.jpg';
+import alaska from '../../images/collections/alaska/chehly-na-trehmestnye-divany/аро.jpg';
+import ibica from '../../images/collections/ibica/chehly-dlya-uglovogo-divana/беж-ЛУ.jpg';
+import greciya from '../../images/collections/greciya/chehly-dlya-kresel/марон.jpg';
 
-function Home(){
+function Home(props){
     (() => window.scrollTo(0, 0))();
     return(
         <div className="container-wrap">
             <section className="home content-height">
                 <h3 className="home-title"><span>Выберите категорию</span></h3>
                 <div className="home-category">
-                    <Link to='/collections/chehly-dlya-kresel' className="home-link" >
-                        <div className="home-link__img"><img src={armchairs} alt="" /></div> 
-                        <span>Кресла</span>
-                    </Link>
-                    <Link to='/collections/chehly-na-dvuhmestnye-divany' className="home-link" >
-                        <div className="home-link__img"><img src={sofa} alt="" /></div> 
-                        <span>Диваны</span>
-                    </Link>
-                    <Link to='/collections/chehly-dlya-stulev' className="home-link" >
-                        <div className="home-link__img"><img src={chairs} alt="" /></div> 
-                        <span>Стулья</span>
-                    </Link>
+                {
+                    props.categorys.map((category, index) => {
+                        return(
+                            <Link key={index} to={`/collections/${category.name_eng}`} className="home-link" >
+                                <div className="home-link__img"><Svg icon={category.icon} /></div>
+                                <span>{category.name_ru}</span>
+                            </Link>
+                        );
+                    })
+                } 
                 </div>
                 <div className="home-grid">
-                    <div className="left-grid">left</div>
+                    <div className="left-grid">
+                        <Link to="/collections/chehly-na-dvuhmestnye-divany/akapulko" style={{backgroundImage: `url('${akapulko}')`}}>
+                            <span>Коллекция Акапулько</span>
+                        </Link>
+                    </div>
                     <div className="right-grid">
                         <div className="right-grid__top">
-                            <div className="right-grid__top-left">Top</div>
-                            <div className="right-grid__top-right">Right</div>
+                            <div className="right-grid__top-left">
+                                <Link to="/collections/chehly-na-trehmestnye-divany/alaska" style={{backgroundImage: `url('${alaska}')`}}>
+                                    <span>Коллекция Аляска</span>
+                                </Link>
+                            </div>
+                            <div className="right-grid__top-right">
+                                <Link to="/collections/chehly-dlya-kresel/greciya" style={{backgroundImage: `url('${greciya}')`}}>
+                                    <span>Коллекция Греция</span>
+                                </Link>
+                            </div>
                         </div>
                         <div className="right-grid__bottom">
-                            bottom
+                            <Link to="/collections/chehly-dlya-uglovogo-divana/ibica" style={{backgroundImage: `url('${ibica}')`}}>
+                                <span>Коллекция Ибица</span>
+                            </Link>
                         </div>
                     </div>
                 </div>

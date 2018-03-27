@@ -1,8 +1,9 @@
 import React from 'react';
 import Collection from '../SmallCollection';
-
 import { Route } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
+import Lazyload from 'react-lazyload';
+import Placeholder from '../../Placeholder';
 
 import "./style.css";
 
@@ -45,16 +46,20 @@ export default function CollectionWrap(props){
                     </div>
                     <div className="catalog__bottom">
                     {
-                        filterCollections.map(collection => (
-                            <Collection
-                                key={collection.id}
-                                collection={collection}
-                                model={collection.model}
-                                models={models}
-                                category={category}
-                                categorys={categorys}
-                                countrys={countrys} />
-                        ))
+                        filterCollections.map((collection, index) => {
+                            return (
+                                <Lazyload once key={index} height={200} offset={[-160, 0]} placeholder={<Placeholder />} debounce={500}>
+                                    <Collection
+                                        key={collection.id}
+                                        collection={collection}
+                                        model={collection.model}
+                                        models={models}
+                                        category={category}
+                                        categorys={categorys}
+                                        countrys={countrys} />
+                                </Lazyload>
+                            );
+                        })
                     } 
                     </div>
                 </section>

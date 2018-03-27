@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 import LazyLoad from 'react-lazyload';
+import { Map, Marker, MarkerLayout } from 'yandex-map-react';
 import "./style.css";
 
 import image1 from './images/1.jpg';
@@ -35,14 +36,6 @@ export default class Location extends Component {
         };
     }
 
-    componentDidMount(){
-        const script = document.createElement("script");
-        this.location = document.getElementsByClassName('location-line__map');
-        script.src = "https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A9fc47051c356781cc290d25496190f976a229112982bf1587aec61f5794bf6f4&amp;amp;height=100%&amp;scroll=false;zoom=false;amp;lang=ru_RU";
-        script.async = true;
-        this.location[0].appendChild(script);  
-    }
-
     goIndexSlick(index) {
         this.SliderStore.slickGoTo(index);
     }
@@ -52,7 +45,11 @@ export default class Location extends Component {
             <div className="location-line">
                 {this.props.children}
                 <div className="location-line__wrap">
-                    <div className="location-line__map"></div>
+                    <div className="location-line__map">
+                        <Map center={[53.91859557061552, 27.579050932540895]} style={{width: '100%', height: '100%' }} zoom={15}>
+                            <Marker lat={53.91859557061552} lon={27.579050932540895} />
+                        </Map>
+                    </div>
                     <div className="location-slider__wrap">
                         <div className="location-slider__image">
                             <LazyLoad height={200} onec>

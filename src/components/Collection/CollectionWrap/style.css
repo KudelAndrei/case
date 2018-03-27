@@ -40,3 +40,6 @@
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
 }
+.catalog__bottom .placeholder {
+    margin-bottom: 20px;
+}

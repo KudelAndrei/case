@@ -8,7 +8,6 @@ import Price from '../children/Price';
 import Stars from '../children/Stars';
 import Svg from '../../Svg';
 
-
 import "./styel.css";
 
 export default class Collection extends Component {
@@ -64,7 +63,7 @@ export default class Collection extends Component {
                     <div className="catalog-item__img-color">
                         <h4>{initTexture.title}</h4>
                         <div className="catalog-item-img-wrapper">
-                            <Lazyload height={200} once>
+                            <Lazyload height={300} offset={200} once>
                                 <img src={require(`../../../images/collections/${this.getModel(model).name_eng}/textures/${initTexture.texture_url}`)} alt={initTexture.title} />
                             </Lazyload>
                         </div>
@@ -110,7 +109,7 @@ export default class Collection extends Component {
                                     <h4>{image.title}</h4>
                                     <div className="catalog-item-img-wrapper">
                                         <Svg icon="check" />
-                                        <Lazyload height={200} >
+                                        <Lazyload height={300} offset={200} once>
                                             <img src={require(`../../../images/collections/${this.getModel(model).name_eng}/textures/${image.texture_url}`)} alt={image.title} />
                                         </Lazyload>
                                     </div>

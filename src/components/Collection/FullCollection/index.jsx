@@ -29,7 +29,7 @@ export default class FullCollection extends Component{
     };
     constructor(props){
         super(props);
-        this.state = { option: 1, activeImage: 0, hoverTexture: null };
+        this.state = { option: 1, activeImage: 0, hoverTexture: null, viewport: {} };
         this.handleOption = this.handleOption.bind(this);
         this.goIndexSlick = this.goIndexSlick.bind(this);
         this.getCategoryId = this.getCategoryId.bind(this);
@@ -41,6 +41,7 @@ export default class FullCollection extends Component{
         this.scrollToTop = this.scrollToTop.bind(this);
         this.hoverTexture = this.hoverTexture.bind(this);
         this.hoverTextureOut = this.hoverTextureOut.bind(this);
+        this.resizeMixin = this.resizeMixin.bind(this);
         this.setSliderCollection = {};
         this.setSliderTexture = {};
         this.setLinkInner = {};
@@ -48,26 +49,21 @@ export default class FullCollection extends Component{
 
     componentDidMount(){
         window.scrollTo(0, 0);
-
-        Events.scrollEvent.register('begin', function(to, element) {
-            console.log("begin", arguments);
-        });
-
-        Events.scrollEvent.register('end', function(to, element) {
-            console.log("end", arguments);
-        });
-
         scrollSpy.update();
+        window.addEventListener('load', this.resizeMixin);
+        window.addEventListener('resize', this.resizeMixin);
     }
 
     componentWillMount(){
         Events.scrollEvent.remove('begin');
         Events.scrollEvent.remove('end');
+        window.removeEventListener('resize', this.resizeMixin);
 
         this.setSliderCollection = {
             className: 'slider-collection',
             dots: false,
             infinite: false,
+            lazyLoad: true,
             speed: 200,
             arrows: false,
             fade: true,
@@ -110,7 +106,7 @@ export default class FullCollection extends Component{
     }
 
     hoverTexture(index){
-        this.setState({ hoverTexture: index });
+        this.state.viewport.width > 1000 && this.setState({ hoverTexture: index });
     }
 
     hoverTextureOut(){
@@ -120,12 +116,23 @@ export default class FullCollection extends Component{
     handleOption(id){
         this.setState({ option: id, activeImage: 0 }, () => {
             this.goIndexSlick(this.state.activeImage);
+            scrollSpy.update();
         });
+        scrollSpy.update();
     }
 
     goIndexSlick(index) {
         this.SliderCollection.slickGoTo(index);
-        this.SliderTexture.slickGoTo(index);
+        this.SliderTexture !== null && this.SliderTexture.slickGoTo(index);
+    }
+
+    resizeMixin() {
+        this.setState({
+            viewport: {
+                width: document.documentElement.clientWidth,
+                height: document.documentElement.clientHeight
+            }
+        });
     }
 
     getCategoryId(title){
@@ -187,12 +194,11 @@ export default class FullCollection extends Component{
                             <div className="content_left">
                                 <div className="content_left-slider">
                                     <div className="content_left-slider-inner">
-
                                         <Slider {...this.setSliderCollection} ref={SliderCollection => this.SliderCollection = SliderCollection} >
                                             {
                                                 optionCollection.images.map((slide, index) => (
                                                     <div className={`${this.setSliderCollection.className}-slide`} key={index}>
-                                                        <LazyLoad height={200}>
+                                                        <LazyLoad height={400}>
                                                             <img src={require(`../../../${path}/${slide.main_url}`)} alt={slide.title} />
                                                         </LazyLoad>
                                                     </div>
@@ -200,17 +206,22 @@ export default class FullCollection extends Component{
                                             }
                                         </Slider>
 
-                                        <Slider {...this.setSliderTexture} ref={SliderTexture => this.SliderTexture = SliderTexture} >
-                                            {
-                                                optionCollection.images.map((slide, index) => (
-                                                    <div className={`${this.setSliderTexture.className}-slide`} key={index} onClick={() => this.goIndexSlick(index)}>
-                                                        <LazyLoad height={200}>
-                                                            <img src={require(`../../../${path}/${slide.main_url}`)} alt={slide.title} />
-                                                        </LazyLoad>
-                                                    </div>
-                                                ))
-                                            }
-                                        </Slider>
+                                        {
+                                            optionCollection.images.length > 1 ?
+                                            <Slider {...this.setSliderTexture} ref={SliderTexture => this.SliderTexture = SliderTexture} >
+                                                {
+                                                    optionCollection.images.map((slide, index) => (
+                                                        <div className={`${this.setSliderTexture.className}-slide`} key={index} onClick={() => this.goIndexSlick(index)}>
+                                                            <LazyLoad height={200}>
+                                                                <img src={require(`../../../${path}/${slide.main_url}`)} alt={slide.title} />
+                                                            </LazyLoad>
+                                                        </div>
+                                                    ))
+                                                }
+                                            </Slider>
+                                            :
+                                            null
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -246,7 +257,7 @@ export default class FullCollection extends Component{
                                                 >
                                                     <Svg icon="check" />
                                                     <div className="texture__wrap">
-                                                        <LazyLoad height={200}>
+                                                        <LazyLoad height={100}>
                                                             <img src={require(`../../../images/collections/${model}/textures/${image.texture_url}`)} alt={image.title} />
                                                         </LazyLoad>
                                                     </div>
@@ -301,7 +312,7 @@ export default class FullCollection extends Component{
                                         ({style, isSticky, wasSticky, distanceFromTop, distanceFromBottom, calculatedHeight}) => {
                                             return (
                                                 <div className="image-fixed" style={style}>
-                                                    <LazyLoad height={200}>
+                                                    <LazyLoad height={400}>
                                                         <img src={require(`../../../${path}/${optionCollection.images[this.state.activeImage].main_url}`)} alt={optionCollection.images[this.state.activeImage].title} />
                                                     </LazyLoad>
                                                 </div>

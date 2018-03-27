@@ -614,6 +614,9 @@
     text-decoration: none;
     border-bottom: 1px solid #7f013e;
 }
+.slide-menu .slide-menu__link:last-child {
+    margin-bottom: 40px;
+}
 .slide-menu__bottom .slide-menu__link.active {
     background-color: #7f013e;
 }

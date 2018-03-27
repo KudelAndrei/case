@@ -24,8 +24,7 @@ class App extends Component {
                 <React.Fragment>
                     <Navigation categorys={categorys} {...data} />
                     <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/case" component={Home} />
+                        <Route exact path="/" render={(props) => <Home {...props} categorys={categorys} />} />
                         <Route exact path="/dostavka" component={Delivery} />
                         <Route exact path="/rassrochka" component={InstallmentPlan} />
                         <Route exact path="/o-produkcii" component={AboutProducts} />

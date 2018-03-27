@@ -111,6 +111,8 @@ body.popup-open {
 
 .popup-review-send {
     padding: 15px;
+    max-width: 500px;
+    width: 100vw;
 }
 
 .popup-review {

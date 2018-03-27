@@ -9,9 +9,7 @@ export default function DescriptionCollection(props){
     const collectionsFilter = collections.filter(collection => collection.model === model);
     const modelFilter = collectionsFilter.map(thisCollection => {
         return models.filter(thisModel => thisModel.id === thisCollection.model)
-    })
-
-    console.log(modelFilter)
+    });
 
     return(
         <div className="options-line">

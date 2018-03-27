@@ -9,8 +9,9 @@ export default class Popup extends Component {
     }
 
     togglePopup(){
-        this.setState({ toggle: !this.state.toggle });
-        !this.state.toggle ? document.body.classList.add('popup-open') : document.body.classList.remove('popup-open');
+        this.setState({ toggle: !this.state.toggle }, () => {
+            this.state.toggle ? document.body.classList.add('popup-open') : document.body.classList.remove('popup-open');
+        });
     }
 
     render() {
@@ -21,7 +22,7 @@ export default class Popup extends Component {
                     this.state.toggle ?
                         <div className="popup-wrap">
                             <div className="popup-bg" onClick={this.togglePopup}></div>
-                            <div className="popup__content" onClick={this.togglePopup}>
+                            <div className="popup__content">
                                 <div className={`popup ${this.props.className}`}>
                                     <div className="popup-close" onClick={this.togglePopup}>+</div>
                                     {this.props.children}
